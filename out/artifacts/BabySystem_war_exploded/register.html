@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>BBSytem - Register</title>
+    <meta name="description" content="">
+    <meta name="author" content="templatemo">
+
+    <link href="css/font-awesome.min.css" rel="stylesheet">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/templatemo-style.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body class="light-gray-bg">
+<div class="templatemo-content-widget templatemo-login-widget white-bg">
+    <header class="text-center">
+        <div class="square"></div>
+        <h1>BB婴儿坊管理系统 注册</h1>
+    </header>
+    <form action="" class="templatemo-login-form" name="registerform">
+        <!--账号-->
+        <div class="text-center">
+            <h5>账号</h5>
+        </div>
+        <div class="form-group">
+            <div class="input-group">
+                <div class="input-group-addon"><i class="fa fa-user fa-fw"></i></div>
+                <input type="text" class="form-control" placeholder="请输入账号" name="user"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="input-group">
+                <div class="input-group-addon"><i class="fa fa-key fa-fw">1</i></div>
+                <input type="password" class="form-control" placeholder="请输入一级密码(基本功能的验证密码)" name="pw1"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="input-group">
+                <div class="input-group-addon"><i class="fa fa-key fa-fw">2</i></div>
+                <input type="password" class="form-control" placeholder="请输入二级密码(高级管理功能的验证密码)" name="pw2"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <button type="submit" class="templatemo-blue-button width-100" onclick="return register(this.form)">注册</button>
+        </div>
+    </form>
+</div>
+<div class="templatemo-content-widget templatemo-login-widget templatemo-register-widget white-bg">
+    <p>已有账号? <strong><a href="login.html" class="blue-text">这里登录!</a></strong></p>
+</div>
+</body>
+<script src="js/jquery-3.3.1.min.js" ></script>
+<script>
+
+    function register(loginform){
+        if(loginform.user.value==""){       //验证用户名是否为空
+            alert("请输入用户名！");loginform.user.focus();return false;
+        }
+        if(loginform.pw1.value==""){       //验证密码是否为空
+            alert("请输入一级密码！");loginform.pw.focus();return false;
+        }
+        if(loginform.pw2.value==""){
+            alert("请输入二级密码！");loginform.pw.focus();return false;
+        }
+        var param="register.user?user="+loginform.user.value+"&pw1="+loginform.pw1.value+"&pw2="+loginform.pw2.value;  //将登录信息连接成字符串，作为发送请求的参数
+        $.post(param,null,callback);
+        return false;
+    }
+    function callback(data){
+        if(data=="false"){
+            alert("您输入的用户名或密码有错！");loginform.user.focus();
+        }else {
+            alert("注册成功");
+            window.location.href = "login.html";//跳转到主页
+        }
+    }
+</script>
+</html>
